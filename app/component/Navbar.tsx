@@ -1,27 +1,85 @@
 "use client";
-import { useState } from "react";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <nav className="bg-white  lg:px-[60px] py-4 lg:py-6 flex items-center gap-[100px] ">
+    <nav
+      className={`fixed w-full bg-white lg:px-[60px] md:px-8 px-5 lg:py-6 py-3 flex items-center justify-between ${
+        isScrolled ? "border-b-[3px] border-primary" : ""
+      }`}
+    >
       <div>
-        <h1 className="text-primary font-extrabold text-[24px]">
+        <Link
+          href={"/"}
+          className="text-primary font-extrabold text-xl md:text-2xl"
+        >
           Ridzna Asep Purwanto
-        </h1>
+        </Link>
       </div>
       <div className="text-black1 hidden lg:flex lg:flex-row lg:gap-10">
-        <h1 className="underline-offset-auto hover:underline">Beranda</h1>
-        <h1 className="underline-offset-auto hover:underline">Tentang Saya</h1>
-        <h1 className="underline-offset-auto hover:underline">Skill</h1>
-        <h1 className="underline-offset-auto hover:underline">Pendidikan</h1>
-        <h1 className="underline-offset-auto hover:underline">Pengalaman</h1>
-        <h1 className="underline-offset-auto hover:underline">Portofolio</h1>
-        <h1 className="underline-offset-auto hover:underline">Kontak</h1>
+        <Link
+          href={"/"}
+          className="text-lg text-black2 hover:scale-95 hover:border-b-[3px] hover:text-primary hover:duration-300 hover:ease-out hover:font-semibold hover:border-primary"
+        >
+          Beranda
+        </Link>
+        <Link
+          href={"/"}
+          className="text-lg text-black2 hover:scale-95 hover:border-b-[3px] hover:text-primary hover:duration-300 hover:ease-out hover:font-semibold hover:border-primary"
+        >
+          Tentang Saya
+        </Link>
+        <Link
+          href={"/"}
+          className="text-lg text-black2 hover:scale-95 hover:border-b-[3px] hover:text-primary hover:duration-300 hover:ease-out hover:font-semibold hover:border-primary"
+        >
+          Skill
+        </Link>
+        <Link
+          href={"/"}
+          className="text-lg text-black2 hover:scale-95 hover:border-b-[3px] hover:text-primary hover:duration-300 hover:ease-out hover:font-semibold hover:border-primary"
+        >
+          Pendidikan
+        </Link>
+        <Link
+          href={"/"}
+          className="text-lg text-black2 hover:scale-95 hover:border-b-[3px] hover:text-primary hover:duration-300 hover:ease-out hover:font-semibold hover:border-primary"
+        >
+          Pengalaman
+        </Link>
+        <Link
+          href={"/"}
+          className="text-lg text-black2 hover:scale-95 hover:border-b-[3px] hover:text-primary hover:duration-300 hover:ease-out hover:font-semibold hover:border-primary"
+        >
+          Portofolio
+        </Link>
+        <Link
+          href={"/"}
+          className="text-lg text-black2 hover:scale-95 hover:border-b-[3px] hover:text-primary hover:duration-300 hover:ease-out hover:font-semibold hover:border-primary"
+        >
+          Kontak
+        </Link>
       </div>
-      <div className="hidden lg:flex gap-4"></div> {/* Corrected gap- */}
-      {/* Hamburger */}
+
       <div
         onClick={() => setIsOpen((prev) => !prev)}
         className={`${
@@ -29,38 +87,37 @@ export default function Navbar() {
         } flex flex-col items-center w-fit gap-[7px] cursor-pointer lg:hidden z-50 py-2`}
       >
         <span className="transition-all duration-500 ease-in-out h-[2px] w-5 bg-black rounded-full"></span>
-        <span className="transition-all duration-500 ease-in-out h-[2px] w-4 bg-black rounded-full"></span>
+        <span className="transition-all duration-500 ease-in-out h-[2px] w-6 bg-black rounded-full"></span>
         <span className="transition-all duration-500 ease-in-out h-[2px] w-5 bg-black rounded-full"></span>
       </div>
       <div
-        className={`w-full text-center flex flex-col absolute top-[64px] left-0 p-5 gap-6 bg-primary border-t lg:hidden border-black2/20 ${
-          isOpen ? "translate-y-0" : "-translate-y-[130%]"
+        className={`w-full text-center flex flex-col absolute top-[60px] left-0 p-5 gap-6 bg-white border-t lg:hidden ${
+          isOpen ? "translate-x-0" : "-translate-x-[130%]"
         } transition-all duration-500 ease-in-out`}
       >
-        <ul className="text-white text-lg font-semibold">
-          <li className="px-12 py-[10px] border-b-2 border-white hover:bg-white hover:text-black1 cursor-pointer">
-            Home
+        <ul className="text-black2 font-semibold text-left">
+          <li className="px-5 py-[10px] hover:text-primary hover:bg-primary/30 hover:ease-in hover:duration-300 hover:scale-95 rounded-md cursor-pointer">
+            Beranda
           </li>
-          <li className="px-12 py-[10px] border-b-2 border-white hover:bg-white hover:text-black1 cursor-pointer">
-            About
+          <li className="px-5 py-[10px] hover:text-primary hover:bg-primary/30 hover:ease-in hover:duration-300 hover:scale-95 rounded-md cursor-pointer">
+            Tentang Saya
           </li>
-          <li className="px-12 py-[10px] border-b-2 border-white hover:bg-white hover:text-black1 cursor-pointer">
-            Skills
+          <li className="px-5 py-[10px] hover:text-primary hover:bg-primary/30 hover:ease-in hover:duration-300 hover:scale-95 rounded-md cursor-pointer">
+            Skill
           </li>
-          <li className="px-12 py-[10px] border-b-2 border-white hover:bg-white hover:text-black1 cursor-pointer">
-            Educations
+          <li className="px-5 py-[10px] hover:text-primary hover:bg-primary/30 hover:ease-in hover:duration-300 hover:scale-95 rounded-md cursor-pointer">
+            Pendidikan
           </li>
-          <li className="px-12 py-[10px] border-b-2 border-white hover:bg-white hover:text-black1 cursor-pointer">
-            Experiences
+          <li className="px-5 py-[10px] hover:text-primary hover:bg-primary/30 hover:ease-in hover:duration-300 hover:scale-95 rounded-md cursor-pointer">
+            Pengalaman
           </li>
-          <li className="px-12 py-[10px] border-b-2 border-white hover:bg-white hover:text-black1 cursor-pointer">
+          <li className="px-5 py-[10px] hover:text-primary hover:bg-primary/30 hover:ease-in hover:duration-300 hover:scale-95 rounded-md cursor-pointer">
             Portofolio
           </li>
-          <li className="px-12 py-[10px] border-b-2 border-white hover:bg-white hover:text-black1 cursor-pointer">
-            Contact
+          <li className="px-5 py-[10px] hover:text-primary hover:bg-primary/30 hover:ease-in hover:duration-300 hover:scale-95 rounded-md cursor-pointer">
+            Kontak
           </li>
         </ul>
-        {/* Add your dropdown menu items here */}
       </div>
     </nav>
   );
