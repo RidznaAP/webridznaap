@@ -45,7 +45,7 @@ export default function Hero() {
             width={1000}
             height={1000}
             className="object-cover w-full h-full -rotate-12 -ml-[22px]"
-            style={{ height: 421 }}
+            style={{ height: 426 }}
           />
         </div>
         <div className="absolute -right-24 -top-20 -z-50">
