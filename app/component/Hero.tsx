@@ -25,7 +25,9 @@ export default function Hero() {
           pertumbuhan melalui inovasi digital yang bermakna.
         </p>
         <Link
-          href={"/"}
+          href={
+            "https://drive.google.com/drive/folders/173KQkLwqag64i-0Wi7yBH1uM4e_5m7YC?usp=drive_link"
+          }
           className="w-fit flex items-center gap-2 px-5 py-[10px] bg-primary rounded-[10px] mt-[10px]"
         >
           <div className="border-b-2 overflow-hidden border-white move-down">
