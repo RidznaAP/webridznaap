@@ -46,7 +46,7 @@ export default function About() {
 
           <Link
             href="https://wa.me/6282261945398"
-            className="w-full flex items-center justify-center lg:justify-start lg:max-w-[258px] gap-2 border border-primary rounded-[10px] px-5 py-[5px] text-primary font-semibold text-xl"
+            className="w-full flex items-center justify-center lg:justify-start lg:max-w-[270px] gap-2 border border-primary rounded-[10px] px-5 py-[5px] text-primary font-semibold text-xl"
           >
             <Icon name="chat" />
             <span>Kenal Lebih Dekat</span>
