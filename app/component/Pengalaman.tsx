@@ -4,12 +4,12 @@ import Image from "next/image";
 
 export default function Pengalaman() {
   return (
-    <div className="pt-[20px] md:pt-[200px] px-5 md:px-[100px] lg:px-[150px] flex flex-col items-center">
+    <div className="pt-[80px] md:pt-[200px] px-5 md:px-[100px] lg:px-[150px] flex flex-col items-center">
       <h1 className="font-extrabold text-black1 text-[32px] text-center">
         Pengalaman
       </h1>
       <div className="w-full mt-3 p-5 rounded-lg">
-        <div className="flex overflow-x-auto space-x-5 pb-5">
+        <div className="flex overflow-x-auto scrollbar-hide space-x-5 pb-5">
           {[
             {
               title: "Super Team Afeksi Batch 3",

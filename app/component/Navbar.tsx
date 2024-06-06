@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full bg-white lg:px-[60px] md:px-8 px-5 lg:py-6 py-3 flex items-center justify-between ${
+      className={`fixed w-full bg-white lg:px-[60px] md:px-8 px-5 lg:py-6 py-3 flex items-center justify-between z-50 ${
         isScrolled ? "border-b-[3px] border-primary" : ""
       }`}
     >
