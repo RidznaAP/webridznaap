@@ -5,6 +5,7 @@ import About from "./component/About";
 import Pengalaman from "./component/Pengalaman";
 import Education from "./component/Education";
 import Skill from "./component/Skill";
+import Contact from "./component/Contact";
 
 export default function page() {
   return (
@@ -15,6 +16,7 @@ export default function page() {
       <Education />
       <Pengalaman />
       <Portofolio />
+      <Contact />
     </>
   );
 }
