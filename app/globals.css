@@ -19,24 +19,31 @@
   0% {
     transform: rotate(0deg);
   }
+
   10% {
     transform: rotate(14deg);
   }
+
   20% {
     transform: rotate(-8deg);
   }
+
   30% {
     transform: rotate(14deg);
   }
+
   40% {
     transform: rotate(-4deg);
   }
+
   50% {
     transform: rotate(10deg);
   }
+
   60% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
@@ -58,6 +65,7 @@
   0% {
     width: 0;
   }
+
   100% {
     width: 100%;
   }
@@ -72,21 +80,25 @@
 }
 
 @keyframes blink-caret {
+
   0%,
   100% {
     border-color: transparent;
   }
+
   50% {
     border-color: white;
   }
 }
 
 @keyframes rainArrow {
+
   0%,
   100% {
     transform: translateY(0);
     opacity: 1;
   }
+
   50% {
     transform: translateY(100%);
     opacity: 0;
@@ -104,10 +116,14 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
-/* :root {
+
+/* Optional CSS variables (kept for reference)
+:root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -121,15 +137,17 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-} */
+}
+
+/* Global site palette: use Tailwind tokens defined in tailwind.config.ts */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white1 text-black1 antialiased;
+}
