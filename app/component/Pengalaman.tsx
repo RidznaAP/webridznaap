@@ -1,192 +1,215 @@
 "use client";
-import React, { useRef } from "react";
-import Afeksi from "@/public/image/Afeksi.png";
-import Image from "next/image";
+import React, { useState } from "react";
 
 const experiences = [
   {
-    title: "Super Team Afeksi Batch 3",
-    role: "UI/UX Designer",
-    period: "2023 – 2024",
-    description:
-      "Bertanggung jawab atas riset pengguna, wireframing, perancangan visual UI web admin, dan prototipe interaktif untuk platform kesehatan mental Afeksi.",
+    id: 1,
+    company: "Badan Karantina Indonesia – Deputi Karantina Ikan",
+    role: "Pengolah Data & Informasi",
+    program: "Program Maganghub Kemnakar Batch 2",
+    period: "Nov 2025 – Mei 2026",
+    periodBadge: "2025 – 2026",
+    type: "Internship",
+    typeColor: "#065F46",
+    typeBg: "#D1FAE5",
+    icon: "🐟",
+    iconBg: "linear-gradient(135deg, #0A2540, #1B4F8A)",
+    bullets: [
+      "Membangun Sistem Informasi Pemantauan Hama dan Penyakit Ikan Karantina (SIP-HIPIK) berbasis PHP guna mendigitalisasi dan mempercepat alur pengawasan instansi.",
+      "Memproses, membersihkan, dan menganalisis lebih dari 100.000 data rekam jejak ekspor-impor komoditas karantina ikan untuk menghasilkan akurasi pelaporan yang tinggi.",
+      "Menjamin validasi data dan meminimalkan anomali input data pada sistem pelaporan berkala.",
+    ],
   },
   {
-    title: "Grow Bareng",
-    role: "Creative Design",
-    period: "2023 – 2024",
-    description:
-      "Mengembangkan aset visual pemasaran digital, konten Instagram kreatif, dan merancang identitas visual yang konsisten untuk memperkuat branding program.",
+    id: 2,
+    company: "Lembaga Sertifikasi Profesi UMP",
+    role: "Staf IT · Student Internship",
+    program: null,
+    period: "Feb 2024 – Nov 2025",
+    periodBadge: "2024 – 2025",
+    type: "Internship",
+    typeColor: "#1B4F8A",
+    typeBg: "#E8F4FD",
+    icon: "🏛️",
+    iconBg: "linear-gradient(135deg, #1B4F8A, #3B9EDE)",
+    bullets: [
+      "Mengelola sistem uji kompetensi digital dan aset media sosial LSP, berhasil memfasilitasi kelancaran ujian bagi 400+ asesi serta mendukung penambahan 5 skema sertifikasi baru.",
+      "Mengawasi manajemen operasional pelaksanaan Uji Kompetensi Mahasiswa secara konsisten sepanjang 6 periode dan kegiatan program kerja.",
+      "Mengoptimalkan performa infrastruktur IT melalui troubleshooting perangkat keras/lunak secara berkala guna menekan risiko kendala teknis saat uji kompetensi berlangsung.",
+    ],
   },
   {
-    title: "Lembaga Sertifikasi Profesi UMP",
-    role: "Content Creator",
-    period: "2023 – Sekarang",
-    description:
-      "Memproduksi video edukasi, desain konten promosi skema kompetensi profesi, serta mengelola media sosial resmi LSP UMP untuk menjaring pendaftar sertifikasi.",
+    id: 3,
+    company: "PT Mandatech Mataram Mukti",
+    role: "Staf Software Testing",
+    program: "Magang Internal Program Studi",
+    period: "Sep 2024 – Des 2024",
+    periodBadge: "2024",
+    type: "Internship",
+    typeColor: "#92400E",
+    typeBg: "#FEF3C7",
+    icon: "🧪",
+    iconBg: "linear-gradient(135deg, #78350F, #D97706)",
+    bullets: [
+      "Melaksanakan pengujian fungsional (functional testing) secara menyeluruh pada platform sobatlazismu.org dan sosialmu.org untuk memastikan stabilitas fitur sebelum dirilis.",
+      "Mengidentifikasi, mendokumentasikan, dan menelusuri puluhan bug sistem secara detail guna mempercepat proses perbaikan oleh tim developer.",
+      "Meningkatkan standar kualitas dan keandalan produk aplikasi melalui implementasi siklus pengujian sistematis yang terstruktur.",
+    ],
   },
   {
-    title: "GenBI Purwokerto 2024",
-    role: "Media Komunikasi & Informasi",
-    period: "2024",
-    description:
-      "Mengelola arus publikasi humas, merancang infografis edukasi finansial, serta mendokumentasikan program kerja sosial kemasyarakatan GenBI.",
-  },
-  {
-    title: "Study Independent MSIB 5",
-    role: "UI/UX Designer",
-    period: "2023",
-    description:
-      "Mengikuti program studi independen bersertifikat UI/UX, berkolaborasi dalam proyek capstone memecahkan masalah pengguna nyata menggunakan Figma.",
-  },
-  {
-    title: "Internship OTCA",
-    role: "Graphic Design",
-    period: "2022",
-    description:
-      "Merancang visual promosi media sosial harian, infografis edukasi kelas bahasa asing, dan materi iklan digital untuk One Third Consulting & Abroad.",
+    id: 4,
+    company: "Afeksidn",
+    role: "Staf UI/UX Designer",
+    program: "Superteam Internship Batch 3",
+    period: "Apr 2024 – Agt 2024",
+    periodBadge: "2024",
+    type: "Internship",
+    typeColor: "#1B4F8A",
+    typeBg: "#E8F4FD",
+    icon: "🎨",
+    iconBg: "linear-gradient(135deg, #6B21A8, #A855F7)",
+    bullets: [
+      "Merancang arsitektur antarmuka (UI/UX) website admin internal yang intuitif dan adaptif berdasarkan analisis mendalam terhadap kebutuhan pengguna target.",
+      "Memastikan seluruh aset visual dan alur navigasi aplikasi memenuhi standar desain industri (design system) demi mendongkrak efisiensi kerja admin.",
+    ],
   },
 ];
 
 export default function Pengalaman() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const cardWidth = 360;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -cardWidth : cardWidth,
-        behavior: "smooth",
-      });
-    }
-  };
+  const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
     <section
       id="pengalaman"
       className="pt-24 pb-20 px-6 md:px-12 lg:px-24"
-      style={{ background: "#FFFFFF" }}
+      style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F4F7FB 100%)" }}
     >
       <div className="container mx-auto max-w-6xl">
 
         {/* Header */}
-        <div className="flex flex-col items-center mb-12">
+        <div className="flex flex-col items-center mb-14">
           <span
             className="text-xs font-bold tracking-widest uppercase px-4 py-1 rounded-full mb-3 border"
-            style={{ color: "#1B4F8A", background: "#E8F4FD", borderColor: "#CBD5E1" }}
+            style={{ color: "#1B4F8A", background: "#E8F4FD", borderColor: "#B3D4F0" }}
           >
             Jejak Karier
           </span>
-          <h2
-            className="font-extrabold text-3xl md:text-4xl text-center"
-            style={{ color: "#0A2540" }}
-          >
-            Pengalaman Kerja
+          <h2 className="font-extrabold text-3xl md:text-4xl text-center" style={{ color: "#0A2540" }}>
+            Pengalaman
           </h2>
-          <div className="w-14 h-1 rounded-full mt-3" style={{ background: "#3B9EDE" }} />
+          <div className="section-accent" />
         </div>
 
-        {/* Scroll Controls */}
-        <div className="flex justify-end gap-3 mb-6">
-          {["←", "→"].map((arrow, i) => (
-            <button
-              key={arrow}
-              onClick={() => handleScroll(i === 0 ? "left" : "right")}
-              aria-label={i === 0 ? "Scroll left" : "Scroll right"}
-              className="w-10 h-10 rounded-full font-bold text-base transition-all duration-200 flex items-center justify-center"
-              style={{ border: "1.5px solid #CBD5E1", color: "#0A2540", background: "#F5F7FA" }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLButtonElement;
-                el.style.background = "#0A2540";
-                el.style.color = "#FFFFFF";
-                el.style.borderColor = "#0A2540";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLButtonElement;
-                el.style.background = "#F5F7FA";
-                el.style.color = "#0A2540";
-                el.style.borderColor = "#CBD5E1";
-              }}
-            >
-              {arrow}
-            </button>
-          ))}
-        </div>
+        {/* Vertical Timeline */}
+        <div className="relative">
+          {/* Center line */}
+          <div
+            className="absolute left-6 md:left-8 top-0 bottom-0 w-[2px]"
+            style={{ background: "linear-gradient(to bottom, #CBD5E1, #3B9EDE, #CBD5E1)" }}
+          />
 
-        {/* Carousel */}
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto scrollbar-hide gap-6 pb-4 snap-x snap-mandatory"
-          style={{ WebkitOverflowScrolling: "touch" }}
-        >
-          {experiences.map((exp, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 snap-start rounded-2xl overflow-hidden flex flex-col group transition-all duration-300"
-              style={{
-                width: "300px",
-                border: "1px solid #CBD5E1",
-                background: "#FFFFFF",
-                boxShadow: "0 2px 12px rgba(10,37,64,0.06)",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLDivElement;
-                el.style.borderColor = "#3B9EDE";
-                el.style.boxShadow = "0 10px 36px rgba(10,37,64,0.13)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLDivElement;
-                el.style.borderColor = "#CBD5E1";
-                el.style.boxShadow = "0 2px 12px rgba(10,37,64,0.06)";
-              }}
-            >
-              {/* Image */}
-              <div className="relative w-full h-[170px] overflow-hidden" style={{ background: "#EBF0F8" }}>
-                <Image
-                  src={Afeksi}
-                  alt={exp.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-500 group-hover:scale-105"
-                />
+          <div className="flex flex-col gap-8">
+            {experiences.map((exp, index) => (
+              <div key={exp.id} className="relative pl-16 md:pl-20 group">
+                {/* Timeline icon */}
                 <div
-                  className="absolute inset-0"
+                  className="absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
                   style={{
-                    background: "linear-gradient(to top, rgba(10,37,64,0.65) 0%, transparent 60%)",
+                    background: exp.iconBg,
+                    boxShadow: "0 4px 16px rgba(10,37,64,0.2)",
+                    border: "3px solid #F5F7FA",
                   }}
-                />
-                {/* Period chip */}
-                <span
-                  className="absolute bottom-4 left-4 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded"
-                  style={{ background: "#0A2540", color: "#FFFFFF" }}
                 >
-                  {exp.period}
-                </span>
-              </div>
+                  {exp.icon}
+                </div>
 
-              {/* Info */}
-              <div className="p-5 flex flex-col gap-2 flex-grow">
-                <h3
-                  className="font-extrabold text-base md:text-lg leading-tight line-clamp-1 transition-colors duration-200"
-                  style={{ color: "#0A2540" }}
+                {/* Card */}
+                <div
+                  className="rounded-2xl p-5 md:p-6 transition-all duration-300 cursor-pointer"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "1px solid #CBD5E1",
+                    boxShadow: "0 2px 12px rgba(10,37,64,0.06)",
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLDivElement;
+                    el.style.borderColor = "#3B9EDE";
+                    el.style.boxShadow = "0 8px 32px rgba(10,37,64,0.12)";
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLDivElement;
+                    el.style.borderColor = "#CBD5E1";
+                    el.style.boxShadow = "0 2px 12px rgba(10,37,64,0.06)";
+                  }}
+                  onClick={() => setExpanded(expanded === exp.id ? null : exp.id)}
                 >
-                  {exp.title}
-                </h3>
-                <p
-                  className="font-bold text-xs uppercase tracking-wide"
-                  style={{ color: "#3B9EDE" }}
-                >
-                  {exp.role}
-                </p>
-                <p
-                  className="text-xs md:text-sm leading-relaxed mt-1 line-clamp-4"
-                  style={{ color: "#4A5568" }}
-                >
-                  {exp.description}
-                </p>
+                  {/* Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                    <div className="flex-1">
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        <span
+                          className="text-[10px] font-bold px-2.5 py-0.5 rounded-full"
+                          style={{ background: exp.typeBg, color: exp.typeColor }}
+                        >
+                          {exp.type}
+                        </span>
+                        <span
+                          className="text-[10px] font-bold px-2.5 py-0.5 rounded-full"
+                          style={{ background: "#F0F4F8", color: "#4A5568" }}
+                        >
+                          📅 {exp.period}
+                        </span>
+                      </div>
+                      <h3 className="font-extrabold text-base md:text-lg leading-tight" style={{ color: "#0A2540" }}>
+                        {exp.company}
+                      </h3>
+                      <p className="text-sm font-bold mt-0.5" style={{ color: "#3B9EDE" }}>
+                        {exp.role}
+                      </p>
+                      {exp.program && (
+                        <p className="text-xs mt-0.5 italic" style={{ color: "#4A5568" }}>
+                          {exp.program}
+                        </p>
+                      )}
+                    </div>
+                    <button
+                      className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200"
+                      style={{ background: "#F0F4F8", color: "#4A5568" }}
+                      aria-label={expanded === exp.id ? "Collapse" : "Expand"}
+                    >
+                      <span
+                        className="text-sm font-bold transition-transform duration-300"
+                        style={{ display: "inline-block", transform: expanded === exp.id ? "rotate(180deg)" : "rotate(0deg)" }}
+                      >
+                        ▾
+                      </span>
+                    </button>
+                  </div>
+
+                  {/* Expandable bullet points */}
+                  {expanded === exp.id && (
+                    <div className="mt-4 pt-4" style={{ borderTop: "1px solid #EDF2F7" }}>
+                      <ul className="flex flex-col gap-3">
+                        {exp.bullets.map((bullet, i) => (
+                          <li key={i} className="flex gap-3 text-sm leading-relaxed" style={{ color: "#4A5568" }}>
+                            <span className="mt-1 flex-shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: "#3B9EDE", marginTop: "6px" }} />
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Click hint */}
+                  {expanded !== exp.id && (
+                    <p className="text-[10px] mt-3 font-medium" style={{ color: "#9CA3AF" }}>
+                      Klik untuk lihat detail →
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

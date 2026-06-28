@@ -2,152 +2,133 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Hamburger Menu ─── */
 .open span:nth-child(1) {
   transform: rotate(45deg) translate(6.5px, 6.5px);
 }
-
 .open span:nth-child(2) {
   width: 0;
   opacity: 0;
 }
-
 .open span:nth-child(3) {
   transform: rotate(-45deg) translate(6.5px, -6.5px);
 }
 
+/* ─── Waving Hand ─── */
 @keyframes wave {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  10% {
-    transform: rotate(14deg);
-  }
-
-  20% {
-    transform: rotate(-8deg);
-  }
-
-  30% {
-    transform: rotate(14deg);
-  }
-
-  40% {
-    transform: rotate(-4deg);
-  }
-
-  50% {
-    transform: rotate(10deg);
-  }
-
-  60% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
+  0%   { transform: rotate(0deg); }
+  10%  { transform: rotate(14deg); }
+  20%  { transform: rotate(-8deg); }
+  30%  { transform: rotate(14deg); }
+  40%  { transform: rotate(-4deg); }
+  50%  { transform: rotate(10deg); }
+  60%  { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
 }
-
 .animate-waving-hand {
   display: inline-block;
   animation: wave 2s infinite;
   transform-origin: 70% 70%;
 }
 
-.animate-waving-hand {
-  display: inline-block;
-  animation: wave 2s infinite;
-  transform-origin: 70% 70%;
-}
-
-@keyframes typing {
-  0% {
-    width: 0;
-  }
-
-  100% {
-    width: 100%;
-  }
-}
-
-.animate-typing {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid black;
-  animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite;
-}
-
+/* ─── Typewriter ─── */
 @keyframes blink-caret {
-
-  0%,
-  100% {
-    border-color: transparent;
-  }
-
-  50% {
-    border-color: white;
-  }
+  0%, 100% { border-color: transparent; }
+  50%       { border-color: #3B9EDE; }
 }
 
-@keyframes rainArrow {
-
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-
-.animate-rain-arrow {
-  animation: rainArrow 2s ease-out infinite;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
+/* ─── Scrollbar hide ─── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide {
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
-/* Optional CSS variables (kept for reference)
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* ─── Fade In Up (scroll reveal) ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeInUp {
+  animation: fadeInUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-fadeInUp-delay-1 { animation-delay: 0.1s; }
+.animate-fadeInUp-delay-2 { animation-delay: 0.2s; }
+.animate-fadeInUp-delay-3 { animation-delay: 0.3s; }
+.animate-fadeInUp-delay-4 { animation-delay: 0.4s; }
+.animate-fadeInUp-delay-5 { animation-delay: 0.5s; }
+.animate-fadeInUp-delay-6 { animation-delay: 0.6s; }
+
+/* ─── Slide In Left ─── */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* ─── Pulse Glow ─── */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 158, 222, 0); }
+  50%       { box-shadow: 0 0 20px 4px rgba(59, 158, 222, 0.25); }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* ─── Float (gentle bob) ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }
 
-/* Global site palette: use Tailwind tokens defined in tailwind.config.ts */
-html {
-  scroll-behavior: smooth;
+/* ─── Shimmer (skeleton loading) ─── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
+
+/* ─── Gradient text helper ─── */
+.gradient-text {
+  background: linear-gradient(135deg, #1B4F8A 0%, #3B9EDE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glass card ─── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ─── Section divider accent ─── */
+.section-accent {
+  width: 56px;
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #1B4F8A, #3B9EDE);
+  margin-top: 12px;
+}
+
+/* ─── Timeline line ─── */
+.timeline-line {
+  border-left: 2px solid #CBD5E1;
+}
+
+/* ─── Global ─── */
+html { scroll-behavior: smooth; }
 
 body {
-  @apply bg-white1 text-black1 antialiased;
+  font-family: 'Sora', sans-serif;
+  background: #F5F7FA;
+  color: #1A202C;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
